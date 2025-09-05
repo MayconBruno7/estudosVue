@@ -1,0 +1,94 @@
+<body>
+  <div id="app">
+    <div id="div_ola" v-if="mostrar_div">
+      Olá Mundo.
+
+      <div class="texto" v-if="mostrar_div">
+        <label for="texto">Texto</label>
+        <input type="text" class="text" id="texto" class="texto" v-model="texto" v-on:change="alterei">
+        <p v-if="texto" v-bind:style="estilo">Texto digitado: {{ texto }}</p>
+        <button @click="trocarCorTexto">Trocar cor</button>
+        <span v-html="msg"></span>
+      </div>
+
+      <ul class="list" v-for="(item, index) in lista" :key="index">
+        <li>{{ index }} - {{ item.nome }}</li>
+        <input type="text" v-model="item.nome">
+      </ul>
+    </div>
+    <button type="button" v-on:click="mostrar" v-if="!mostrar_div" />Mostrar</button>
+    <button type="button" @click="esconder" v-if="mostrar_div" />Esconder</button>
+
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      mostrar_div: true,
+      texto: '',
+      // mostrarTexto: true
+      lista: [
+        {
+          "nome": 'Maycon',
+        },
+        {
+          "nome": 'Bruno',
+        },
+        {
+          "nome": 'Gomes',
+        }
+      ],
+      cores: [
+        "gray",
+        "red",
+        "blue"
+      ],
+      estilo: "background-color:red",
+      msg: ""
+    },
+    methods: {
+      mostrar() {
+        this.mostrar_div = true;
+      },
+      esconder() {
+        this.mostrar_div = false;
+      },
+      trocarCorTexto() {
+
+        let corAtual;
+
+        for (const cor of this.cores) {
+          if (cor === this.corAtual) {
+            continue
+          }
+          this.estilo = "background-color:" + cor
+          this.corAtual = ""
+          this.corAtual = cor
+          break;
+        }
+      },
+      alterei(event) {
+        alert('Digitou texto')
+        console.log("event", event)
+        this.msg = "Brincando com o VueJS"
+      }
+    },
+    mounted() {
+      console.log('Eu montei o componente')
+    }
+  });
+
+</script>
+
+<style>
+  .texto {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .list {
+    list-style: none;
+  }
+</style>
