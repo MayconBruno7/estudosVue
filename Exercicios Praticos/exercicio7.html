@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 7</title>
+</head>
+
+<body>
+    <h1>Faça um componente que receba via props o título e o conteúdo, e renderize um card estilizado.</h1>
+
+    <div id="app">
+        <div id="card">
+            <h3 id="card-title">{{ titulo }}</h3>
+            <p id="card-content">{{ conteudo }}</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                titulo: "",
+                conteudo: ""
+            },
+            mounted() {
+                this.titulo = "Este é o titulo"
+                this.conteudo = "Este é o conteúdo do seu componente. Aqui você pode adicionar textos, informações, descrições ou qualquer outro tipo de conteúdo que desejar exibir na sua aplicação Vue.js."
+            }
+        })
+    </script>
+
+    <style>
+        #card {
+            border: 3px solid black
+        }
+
+        #card-title {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 16px;
+            border-bottom: 3px solid black;
+        }
+
+        #card-content {
+            padding: 12px;
+        }
+    </style>
+</body>
+
+</html>

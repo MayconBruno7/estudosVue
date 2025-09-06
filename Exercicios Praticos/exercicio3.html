@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 3</title>
+</head>
+
+<body>
+    <h1>3 - Crie um campo de input que atualize em tempo real um <p> exibindo o que o usuário digita. </h1>
+
+    <div id="app">
+        <div class="container">
+            <label for="input">Digite no campo: </label>
+            <input type="text" name="input" id="input" v-model="usuario_digitando">
+        </div>
+        <p v-if="usuario_digitando">Você digitou: {{usuario_digitando}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                usuario_digitando: ""
+            }
+        })
+    </script>
+</body>
+
+</html>

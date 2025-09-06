@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 6</title>
+</head>
+
+<body>
+    <h1>Crie um formulário com nome, email e senha. Exiba os valores digitados embaixo do formulário em tempo real.</h1>
+
+    <div id="app">
+        <form @submit.stop.prevent="">
+            <div id="form">
+                <div>
+                    <label for="nome">Nome: </label>
+                    <input type="text" class="nome" id="nome" v-model="nome">
+                </div>
+                <div>
+                    <label for="email">Email: </label>
+                    <input type="text" class="email" id="email" v-model="email">
+                </div>
+                <div>
+                    <label for="senha">Senha: </label>
+                    <input type="password" class="senha" id="senha" v-model="senha">
+                </div>
+                <button v-on:click="mostrar_envio">Enviar</button>
+
+                <div v-if="mostrar_formulario">
+                    <h3>Formulário enviado</h3>
+                    <p>Nome: {{ nome }}</p>
+                    <p>Email: {{ email }}</p>
+                    <p>Senha: {{ senha }}</p>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                nome: "",
+                email: "",
+                senha: "",
+                mostrar_formulario: false
+            },
+            // computed: () => {
+            //     mostar_formulario() {
+            //         this.nome + this.email + this.senha
+            //     },
+            // }
+            methods: {
+                mostrar_envio() {
+                    this.mostrar_formulario = true
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

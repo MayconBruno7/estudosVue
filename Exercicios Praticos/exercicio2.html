@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 2</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1> 2 - Faça um contador que aumente e diminua o valor ao clicar em botões (+ e -).</h1>
+
+        <p>Contador: {{valor}}</p>
+        <button @click="incrementar">Incrementar</button>
+        <button @click="decrementar">Decrementar</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                valor: 0
+            },
+            methods: {
+                incrementar() {
+                    this.valor++
+                },
+                decrementar() {
+                    if (this.valor === 0) {
+                        alert("Valor ficara negativo")
+                        return
+                    }
+                    this.valor--
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

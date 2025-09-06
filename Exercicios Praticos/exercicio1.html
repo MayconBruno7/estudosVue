@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 1</title>
+</head>
+
+<body>
+    <h1>1- Crie um componente que exiba uma mensagem "Olá, Vue!" e um botão que, ao ser clicado, altere essa mensagem.
+    </h1>
+
+    <div id="app">
+        <p>{{ texto_mensagem }}</p>
+        <button @click="alterar_mensagem">Alterar mensagem</button>
+        <button @click="resetar_mensagem">Resetar mensagem</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                texto_mensagem: "Olá, Vue!"
+            },
+            methods: {
+                alterar_mensagem() {
+                    this.texto_mensagem = "Mensagem alterada"
+                },
+                resetar_mensagem() {
+                    this.texto_mensagem = "Olá, Vue!"
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

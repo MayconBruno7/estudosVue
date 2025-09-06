@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 4</title>
+</head>
+
+<body>
+    <h1>4 - Exiba uma lista de frutas a partir de um array usando v-for.</h1>
+
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>Frutas</th>
+                </tr>
+            </thead>
+            <tbody v-for="(fruta, index) in frutas">
+                <tr>
+                    <td id="lista">{{index + 1}} - {{fruta}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                frutas: [
+                    "Banana",
+                    "Maça",
+                    "Morango"
+                ]
+            }
+        })
+    </script>
+
+    <style>
+        #lista {
+            padding-left: 20px;
+            margin-left: 18px;
+            color: red;
+        }
+    </style>
+</body>
+
+</html>

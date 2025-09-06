@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 8</title>
+</head>
+
+<body>
+
+    <h4>Implemente uma lista de tarefas (to-do list) com opção de adicionar, marcar como concluída e remover tarefa.
+    </h4>
+    <div id="app">
+        <h3 style="text-align: center;">Todo List</h3>
+
+        <div class="container">
+            <button>Adicionar tarefa</button>
+            <table>
+                <thead>
+                    <th>Tarefa</th>
+                    <th>Ação</th>
+                </thead>
+                <tbody v-for="(tarefa, index) in lista_tarefas">
+                    <tr v-if="tarefa">
+                        <td>Tarefa 1</td>
+                        <td>
+                            <Button>Marcar concluída</Button>
+                            <Button>Remover tarefa</Button>
+                        </td>
+                    </tr>
+                    <p v-else>
+                        Nenhum registro encontrado!
+                    </p>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                lista_tarefas: []
+            },
+            methods: {
+                adicionar_tarefa() {
+
+                },
+                marcar_concluido() {
+
+                },
+                remover_tarefa() {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

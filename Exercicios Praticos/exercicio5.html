@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 5</title>
+</head>
+
+<body>
+    <h1>Adicione um botão "Remover" ao lado de cada fruta da lista que a remova quando clicado.</h1>
+
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>Frutas</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody v-for="(fruta, index) in frutas">
+                <tr>
+                    <td id="lista">{{index + 1}} - {{fruta}}</td>
+                    <td>
+                        <button v-on:click="remover_fruta(index)">Remover</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                frutas: [
+                    "Banana",
+                    "Maça",
+                    "Morango"
+                ]
+            },
+            methods: {
+                remover_fruta(index) {
+                    console.log(index)
+                    this.frutas.splice(index, 1)
+                }
+            }
+        })
+    </script>
+
+    <style>
+        #lista {
+            padding-left: 20px;
+            margin-left: 18px;
+            color: red;
+        }
+    </style>
+</body>
+
+</html>
