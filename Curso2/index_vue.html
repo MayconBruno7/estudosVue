@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Diretiva v-on:click</h1>
+        <p>{{titulo}}</p>
+        <button v-on:click="alterar_titulo">Alterar titulo</button>
+
+        <h1>Diretiva v-html</h1>
+        <span v-html="titulo2"></span>
+        <button @click="b1">Botão 1</button>
+        <button @click="b2">Botão 1</button>
+        <button @click="b3">Botão 1</button>
+
+        <h1>Diretiva v-pre</h1>
+        <p v-pre>"!#{$#%%#{##$$$$#$#$# Este é o meu texto}}</p>
+        <h1>Diretiva v-once</h1>
+        <p v-once>{{ nome }}</p>
+        <h1>Diretiva v-text</h1>
+        <p v-text="nome"></p>
+        <button @click="alterar_nome">Alterar nome</button>
+
+        <h1>Diretiva v-on:input com v-bind</h1>
+        <input type="text" v-on:input="myClass = $event.target.value">
+        <p v-bind:class="myClass">Classe CSS: {{myClass}}</p>
+
+        <h1>Diretiva v-model</h1>
+        <h3>{{titulo3}}</h3>
+        <input type="text" v-model="titulo3">
+
+        <h1>Filters</h1>
+        <input type="text" v-model="novoNome">
+        <button @click="adicionarNome">Adicionar +</button>
+
+        <ul>
+            <li v-for="(nome, index) in nomes">
+                {{nome | capitalizar}}
+            </li>
+        </ul>
+
+
+        <h1>Computed</h1>
+        <p>Contador: {{contador}}</p>
+        <p>Cliques: {{numCliques}}</p>
+        <button v-on:click="incrementar">Aumentar</button>
+
+        <h1>Listas, Loops e Condicionais</h1>
+        <p v-if="mostrar">Oba, você está me vendo! ;D</p>
+        <p v-else>Eu estou visivel?</p>
+        <!-- Não é removido do DOM -->
+        <p v-show="mostrar">Ainda estou por aqui? </p>
+
+        <button v-on:click="mostrar = !mostrar">Mostrar / Esconder</button>
+
+        <br><br>
+        <ul>
+            <li v-for="(pais, index) in paises">{{index}} - {{pais.nome}} - {{pais.gdp}}</li>
+        </ul>
+
+        <h1>Watch Properties</h1>
+        <input type="text" v-model="mensagem">
+        <p v-if="digitando">Digitando ...</p>
+
+        <h1>Cliclo de vida de uma instancia vue</h1>
+        <p>{{nome2}}</p>
+        <button @click="alter_nome">Alterar nome</button>
+        <button @click="destruirInstancia">Destruir instancia</button>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                titulo: "Minha primeira aplicação Vue",
+                titulo2: "<h1>Titulo 2<h1>",
+                nome: "Frederico",
+                myClass: "",
+                titulo3: "",
+                novoNome: "",
+                nomes: [],
+                // contador: 0,
+                numCliques: 0,
+                mostrar: true,
+                paises: [
+                    { nome: "Venezuela", gdp: 1 },
+                    { nome: "Brasil", gdp: 20 },
+                    { nome: "Japão", gdp: 30 },
+                    { nome: "Estados Unidos", gdp: 40 },
+                ],
+                mensagem: "",
+                digitando: false,
+                nome2: ""
+            },
+            methods: {
+                alterar_titulo: function () {
+                    this.titulo = "Oba, estou aprendendo!"
+                },
+                b1() {
+                    this.titulo2 = "<h1>Titulo novo 1<h1>"
+                },
+                b2() {
+                    this.titulo2 = "<h1>Titulo novo 2<h1>"
+                },
+                b3() {
+                    this.titulo2 = "<h1>Titulo novo 3<h1>"
+                },
+                alterar_nome() {
+                    this.nome = "Roberto"
+                },
+                adicionarNome: function () {
+                    this.nomes.push(this.novoNome),
+                        this.novoNome = ''
+                },
+                incrementar() {
+                    this.numCliques++
+                },
+                alter_nome() {
+                    this.nome2 = "Fred"
+                },
+                destruirInstancia() {
+                    app.$destroy();
+                }
+
+            },
+            filters: {
+                capitalizar: function (value) {
+                    return value.toUpperCase();
+                }
+            },
+            computed: {
+                contador() {
+                    return this.numCliques + 2
+                }
+            },
+            watch: {
+                mensagem(novoValor, antigoValor) {
+                    console.log(novoValor, antigoValor)
+                    this.digitando = true
+                    setTimeout(() => {
+                        this.digitando = false;
+                    }, 2000)
+                }
+            },
+            beforeCreate() {
+                console.log("Antes de criar")
+            },
+            created() {
+                console.log("Instacia foi Criada")
+            },
+            mounted() {
+                console.log("Instacia foi Montada")
+            },
+            updated() {
+                console.log("Instancia atualizada")
+            },
+            destroyed() {
+                console.log("Instancia foi destruida")
+            },
+        })
+    </script>
+
+    <style>
+        .purple {
+            background-color: purple;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+
+</body>
+
+</html>
