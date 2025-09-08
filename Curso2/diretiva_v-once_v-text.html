@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Diretiva v-once</h1>
+        <p v-once>{{ nome }}</p>
+
+        <h1>Diretiva v-text</h1>
+        <p v-text="nome"></p>
+        <button @click="alterar_nome">Alterar nome</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                nome: "Frederico",
+            },
+            methods: {
+                alterar_nome() {
+                    this.nome = "Roberto"
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

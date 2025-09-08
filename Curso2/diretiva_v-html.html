@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Diretiva v-html</h1>
+        <span v-html="titulo2"></span>
+        <button @click="b1">Botão 1</button>
+        <button @click="b2">Botão 1</button>
+        <button @click="b3">Botão 1</button>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                titulo2: "<h1>Titulo 2<h1>",
+            },
+            methods: {
+                b1() {
+                    this.titulo2 = "<h1>Titulo novo 1<h1>"
+                },
+                b2() {
+                    this.titulo2 = "<h1>Titulo novo 2<h1>"
+                },
+                b3() {
+                    this.titulo2 = "<h1>Titulo novo 3<h1>"
+                },
+
+            },
+
+        })
+    </script>
+</body>
+
+</html>

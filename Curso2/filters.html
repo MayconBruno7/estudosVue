@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Filters</h1>
+        <input type="text" v-model="novoNome">
+        <button @click="adicionarNome">Adicionar +</button>
+
+        <ul>
+            <li v-for="(nome, index) in nomes">
+                {{nome | capitalizar}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                novoNome: "",
+                nomes: [],
+            },
+            methods: {
+                adicionarNome: function () {
+                    this.nomes.push(this.novoNome),
+                        this.novoNome = ''
+                },
+            },
+            filters: {
+                capitalizar: function (value) {
+                    return value.toUpperCase();
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

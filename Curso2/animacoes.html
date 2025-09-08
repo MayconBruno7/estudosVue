@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Animações com Vue</h1>
+        <h3>{{titulo5}}</h3>
+        <transition name="bounce">
+            <div v-if="bounce">
+                <arcade-jogo></arcade-jogo>
+            </div>
+        </transition>
+        <button @click="bounce = !bounce">Bouce</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        Vue.component('arcade-jogo', {
+            data: function () {
+                return {
+                    jogos: [
+                        { nome: "Street Figther 2" },
+                        { nome: "SNK vs Capcom: Chaos" },
+                    ]
+                };
+            },
+            template: `
+                <div>
+                    <div class="jogo" v-for="jogo in jogos">
+                        <p> {{ jogo.nome }} </p>
+                    </div>
+                </div>
+            `,
+        });
+        var app = new Vue({
+            el: "#app",
+            data: {
+                titulo5: 'Meus Jogos Favoritos',
+                bounce: false
+            },
+            methods: {
+                alter_nome() {
+                    this.nome2 = "Fred"
+                },
+                destruirInstancia() {
+                    app.$destroy();
+                }
+            }
+
+        })
+    </script>
+
+    <style>
+        .purple {
+            background-color: purple;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</body>

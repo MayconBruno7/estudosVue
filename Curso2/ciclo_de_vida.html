@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Cliclo de vida de uma instancia vue</h1>
+        <p>{{nome2}}</p>
+        <button @click="alter_nome">Alterar nome</button>
+        <button @click="destruirInstancia">Destruir instancia</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                nome2: "",
+            },
+            methods: {
+                alter_nome() {
+                    this.nome2 = "Fred"
+                },
+                destruirInstancia() {
+                    app.$destroy();
+                }
+            },
+            beforeCreate() {
+                console.log("Antes de criar")
+            },
+            created() {
+                console.log("Instacia foi Criada")
+            },
+            mounted() {
+                console.log("Instacia foi Montada")
+            },
+            updated() {
+                console.log("Instancia atualizada")
+            },
+            destroyed() {
+                console.log("Instancia foi destruida")
+            },
+
+        })
+    </script>
+</body>

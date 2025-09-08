@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Componentes dentro de componentes</h1>
+        <componente-pai></componente-pai>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        Vue.component('componentePai', {
+            template: `
+                <div>
+                    <p> Texto do componente pai </p>
+                    <componente-filho>
+
+                    </componente-filho>
+                </div>
+            `,
+        });
+        Vue.component('componenteFilho', {
+            template: `
+                <div>
+                   <p> Texto do componente filho </p>
+                </div>
+            `,
+        });
+        var app = new Vue({
+            el: "#app",
+            component: [
+                'componentepai',
+                'componentefilho'
+            ],
+            data: {
+
+
+            },
+            methods: {
+
+
+            },
+
+        })
+    </script>
+
+    <style>
+        .purple {
+            background-color: purple;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+
+</body>
+
+</html>

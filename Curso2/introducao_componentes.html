@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Introdução a componentes</h1>
+        <h3>{{ titulo4 }}</h3>
+        <arcade-jogo></arcade-jogo>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        Vue.component('arcade-jogo', {
+            data: function () {
+                return {
+                    jogos: [
+                        { nome: "Street Figther 2" },
+                        { nome: "SNK vs Capcom: Chaos" },
+                    ]
+                };
+            },
+            template: `
+                <div>
+                    <div class="jogo" v-for="jogo in jogos">
+                        <p> {{ jogo.nome }} </p>
+                    </div>
+                </div>
+            `,
+        });
+        var app = new Vue({
+            el: "#app",
+            data: {
+                titulo4: 'Meus Jogos Favoritos',
+            },
+            methods: {
+                alter_nome() {
+                    this.nome2 = "Fred"
+                },
+                destruirInstancia() {
+                    app.$destroy();
+                }
+            }
+
+        })
+    </script>
+</body>
