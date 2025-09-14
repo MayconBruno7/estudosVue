@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exericio 9</title>
+</head>
+
+<body>
+    <h1>
+        9.
+
+        Crie um componente que receba uma lista de números e exiba com computed:
+
+        a soma total,
+
+        o maior valor,
+
+        o menor valor.
+    </h1>
+
+    <div id="app" class="container">
+        <label for="numeros">Numeros</label>
+        <div v-for="(numero, index) in numeros" :key="index">
+            <input type="text" id="numeros" name="numeros[]" v-model="numeros[index]"
+                @input="validarApenasNumeros($event, index)" @keypress="apenasNumeros($event)">
+            <button @click="remover_numero(index)">Remover número</button>
+        </div>
+        <button @click="adicionar_numeros">Adicionar numeros</button>
+
+        <h3>Informações dos valores</h3>
+        <div>
+            <p>Maior valor inserido: {{ retorna_info_valores.maior_valor }}</p>
+            <p>Menor valor inserido: {{ retorna_info_valores.menor_valor }}</p>
+            <p>Soma dos valores inseridos: {{ retorna_info_valores.soma }}</p>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                numeros: [],
+            },
+            methods: {
+                adicionar_numeros() {
+                    this.numeros.push('');
+                    console.log(this.numeros)
+                },
+                remover_numero(index) {
+                    this.numeros.splice(index, 1)
+                },
+                apenasNumeros(event) {
+                    const charCode = event.which ? event.which : event.keyCode;
+                    if (charCode < 48 || charCode > 57) {
+                        event.preventDefault();
+                    }
+                },
+
+
+                validarApenasNumeros(event, index) {
+                    let valor = event.target.value.replace(/[^0-9]/g, '');
+
+                    if (valor.length > 1) {
+                        valor = valor.slice(-1);
+                    }
+
+                    this.numeros[index] = valor;
+                }
+            },
+            computed: {
+                retorna_info_valores() {
+                    const numerosValidos = this.numeros
+                        .map(num => Number(num))
+                        .filter(num => !isNaN(num) && num !== 0);
+
+                    if (numerosValidos.length === 0) {
+                        return { soma: 0, maior_valor: 0, menor_valor: 0 };
+                    }
+
+                    const resultado = this.numeros.reduce((acc, numero) => {
+                        const num = Number(numero) || acc.menor_valor;
+
+                        acc.soma += num;
+                        acc.menor_valor = Math.min(acc.menor_valor, num);
+                        acc.maior_valor = Math.max(acc.maior_valor, num);
+
+                        return acc;
+                    }, {
+                        soma: 0,
+                        menor_valor: Number.MAX_SAFE_INTEGER,
+                        maior_valor: Number.MIN_SAFE_INTEGER
+                    });
+
+                    if (resultado.menor_valor === Number.MAX_SAFE_INTEGER) resultado.menor_valor = 0;
+                    if (resultado.maior_valor === Number.MIN_SAFE_INTEGER) resultado.maior_valor = 0;
+
+                    return resultado;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

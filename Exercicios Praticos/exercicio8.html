@@ -15,18 +15,20 @@
         <h3 style="text-align: center;">Todo List</h3>
 
         <div class="container">
-            <button>Adicionar tarefa</button>
+            <button @click="adicionar_tarefa">Adicionar tarefa</button>
             <table>
                 <thead>
                     <th>Tarefa</th>
+                    <th>Status tarefa</th>
                     <th>Ação</th>
                 </thead>
                 <tbody v-for="(tarefa, index) in lista_tarefas">
                     <tr v-if="tarefa">
-                        <td>Tarefa 1</td>
+                        <td>{{ index + 1 }} - {{ tarefa.nome }}</td>
+                        <td>{{ tarefa.status_tarefa }}</td>
                         <td>
-                            <Button>Marcar concluída</Button>
-                            <Button>Remover tarefa</Button>
+                            <Button @click="marcar_concluido(index)">Marcar concluída</Button>
+                            <Button @click="remover_tarefa(index)">Remover tarefa</Button>
                         </td>
                     </tr>
                     <p v-else>
@@ -47,13 +49,16 @@
             },
             methods: {
                 adicionar_tarefa() {
-
+                    let nome_tarefa = prompt('Informe a tarefa: ')
+                    let status_tarefa = prompt('Informe o status da tarefa: ')
+                    this.lista_tarefas.push({ nome: nome_tarefa, status_tarefa: status_tarefa })
                 },
-                marcar_concluido() {
-
+                marcar_concluido(index) {
+                    this.lista_tarefas[index].status_tarefa = 'Concluído'
+                    alert('Tarefa marcada como concluída!')
                 },
-                remover_tarefa() {
-
+                remover_tarefa(index) {
+                    this.lista_tarefas.splice(index, 1)
                 }
             }
         })
