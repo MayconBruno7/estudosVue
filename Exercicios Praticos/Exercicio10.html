@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 10</title>
+</head>
+
+<body>
+    <h1>
+        Filtro de Busca (Intermediário)
+
+        Crie uma lista de usuários (nome + idade).
+
+        s Adicione um campo de busca que filtra em tempo real os nomes digitados.
+
+        Se nenhum resultado for encontrado, exiba "Nenhum usuário encontrado".
+    </h1>
+
+    <div id="app">
+        <h3>Lista de usuários</h3>
+        <input type="text" v-model="pesquisa" placeholder="Pesquisar usuários">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-if="!pesquisa_usuario.length">
+                    <td>Nenhum usuário encontrado!</td>
+                </tr>
+                <tr v-else v-for="(usuario, index) in pesquisa_usuario">
+                    <td>{{ usuario }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                usuarios: [
+                    "Maycon",
+                    "Lucas",
+                    "João",
+                    "Maria"
+                ],
+                pesquisa: ''
+            },
+            computed: {
+                pesquisa_usuario() {
+                    if (!this.pesquisa) return this.usuarios
+                    novosDados = this.usuarios.filter(u => u.toLowerCase().includes(this.pesquisa.toLowerCase()))
+
+                    return novosDados
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

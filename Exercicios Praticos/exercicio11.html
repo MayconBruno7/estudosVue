@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 11</title>
+</head>
+
+<body>
+    <h1>
+        Formulário com Validação (Intermediário)
+
+        Monte um formulário com: nome, email e senha.
+
+        Validações:
+
+        Nome: obrigatório.
+
+        Email: deve conter "@".
+
+        Senha: mínimo 6 caracteres.
+
+        Exiba os erros abaixo de cada campo, em tempo real.
+    </h1>
+
+    <div id="app">
+        <form @submit.prevent="onSubmit">
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" v-model="form.nome">
+                <p v-if="errors.nome">{{errors.nome}}</p>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" v-model="form.email">
+                <p v-if="errors.email">{{errors.email}}</p>
+            </div>
+            <div>
+                <label for="senha">Senha</label>
+                <input type="text" name="senha" id="senha" v-model="form.senha">
+                <p v-if="errors.senha">{{errors.senha}}</p>
+            </div>
+
+            <button @click="onSubmit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                form: {
+                    nome: '',
+                    email: '',
+                    senha: ''
+                },
+                errors: {
+                    nome: '',
+                    email: '',
+                    senha: ''
+                }
+            },
+            methods: {
+                valida_nome() {
+                    if (!this.form.nome == '') {
+                        this.errors.nome = ''
+                        // return true
+                    } else
+                        this.errors.nome = 'O campo nome é obrigatório!'
+                    // return false
+                },
+                valida_email() {
+                    if (this.form.email.includes('@')) {
+                        this.errors.email = ''
+                        // return true
+                    } else
+                        this.errors.email = 'E-mail inválido!'
+                    // return false
+                },
+                valida_senha() {
+                    if (this.form.senha.length >= 6) {
+                        this.errors.senha = ''
+
+                        // return true
+                    } else
+
+                        this.errors.senha = 'A senha deve conter no minimo 6 digitos!'
+                    // return false
+                },
+                onSubmit() {
+                    this.valida_nome()
+                    this.valida_email()
+                    this.valida_senha()
+
+                    if (this.errors.senha == '' && this.errors.nome == '' && this.errors.email == '') {
+                        alert('Dados enviados!')
+                        return true
+                    } else {
+                        return false
+                    }
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -36,6 +36,9 @@
             <p>Soma dos valores inseridos: {{ retorna_info_valores.soma }}</p>
         </div>
 
+        <!-- <h1>{{retorna_soma}}</h1> -->
+        <!-- <h1>{{retorna_duplicado}}</h1> -->
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
@@ -100,7 +103,17 @@
                     if (resultado.maior_valor === Number.MIN_SAFE_INTEGER) resultado.maior_valor = 0;
 
                     return resultado;
-                }
+                },
+                // retorna_soma() {
+                //     numero = [1, 2, 3, 4]
+                //     const soma = this.numeros.reduce((prevVal, item) => { return Number(prevVal) + Number(item) }, 0)
+                //     return soma
+                // }
+                // retorna_duplicado() {
+                //     numero = [1, 2, 3, 4]
+                //     const duplicado = numero.reduce((prevVal, item) => prevVal * 2)
+                //     return duplicado
+                // }
             }
         })
     </script>
