@@ -17,7 +17,73 @@
 
         Ao recarregar a página, as tarefas devem continuar lá.
     </h1>
+
+    <div id="app">
+        <table>
+            <button @click="adicionar_tarefa">Adicionar tarefa</button>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(tarefa, index) in tarefas">
+                    <td>{{ tarefa.nome }}</td>
+                    <td>{{ tarefa.descricao }}</td>
+                    <td>{{ tarefa.status }}</td>
+                    <td>
+                        <button @click="marcar_concluido(index)">Marcar conclído</button>
+                        <button @click="remover_tarefa(index)">Remover tarefa</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                tarefas: [],
+                lista: JSON.parse(localStorage.getItem("tarefas"))
+            },
+            methods: {
+                marcar_concluido(index) {
+                    let lista = JSON.parse(localStorage.getItem('tarefas')) || [];
+                    lista[index].status = "Concluída ✅";
+
+                    localStorage.setItem("tarefas", JSON.stringify(lista));
+                    this.tarefas = lista;
+                },
+                adicionar_tarefa() {
+                    let nome_tarefa = prompt('Informe a tarefa: ')
+                    let descricao_tarefa = prompt('Informe a descrição da tarefa: ')
+                    let status_tarefa = prompt('Informe o status da tarefa: ')
+
+                    let lista = JSON.parse(localStorage.getItem("tarefas")) || [];
+                    lista.push({ nome: nome_tarefa, descricao: descricao_tarefa, status: status_tarefa });
+
+                    localStorage.setItem("tarefas", JSON.stringify(lista));
+                    this.tarefas = lista
+                },
+                remover_tarefa(index) {
+                    let lista = JSON.parse(localStorage.getItem("tarefas")) || [];
+
+                    lista.splice(index, 1);
+                    localStorage.setItem("tarefas", JSON.stringify(lista));
+                    this.tarefas = lista
+                }
+            },
+            mounted() {
+                this.tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+            }
+        })
+    </script>
 </body>
 
 </html>
