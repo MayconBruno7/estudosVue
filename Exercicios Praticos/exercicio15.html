@@ -22,7 +22,70 @@
 
                 Maior que 20 → "Alto"
     </h1>
+
+    <div id="app">
+        <App></App>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+        Vue.component('contador', {
+            template: `
+                <div>
+                    <h2>Contador: {{ contador }}</h2>
+                    <button @click="decrementar">-</button>
+                    <button @click="incrementar">+</button>
+                </div>
+                `,
+            data() {
+                return {
+                    contador: 0
+                }
+            },
+            methods: {
+                incrementar() {
+                    this.contador++;
+                    this.$emit('atualizar-contador', this.contador);
+                },
+                decrementar() {
+                    this.contador--;
+                    this.$emit('atualizar-contador', this.contador);
+                }
+            }
+        });
+
+        Vue.component('app', {
+            template: `
+                <div>
+                <contador @atualizar-contador="atualizarValor"></contador>
+                <p>Valor atual: {{ valor }}</p>
+                <p>Status: {{ status }}</p>
+                </div>
+            `,
+            data() {
+                return {
+                    valor: 0
+                }
+            },
+            computed: {
+                status() {
+                    if (this.valor < 10) return "Baixo"
+                    if (this.valor <= 20) return "Médio"
+                    return "Alto"
+                }
+            },
+            methods: {
+                atualizarValor(novoValor) {
+                    // console.log(novoValor)
+                    this.valor = novoValor
+                }
+            }
+        });
+        new Vue({
+            el: "#app"
+        });
+    </script>
+
 </body>
 
 </html>

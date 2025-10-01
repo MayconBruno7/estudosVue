@@ -24,8 +24,8 @@
         <ul v-if="posts.length">
             <li v-for="(post, index) in posts" :key="post.id">
                 <h3>{{ post.title }}</h3>
-                <button v-on:click="ver_detalhes(index)">Ver detalhes</button>
-                <p v-if="ver_detalhes">{{ post.body }}</p>
+                <button v-on:click="ver_detalhes(post.id)">Ver detalhes</button>
+                <p v-if="post_selecionado === post.id">{{ post.body }}</p>
             </li>
         </ul>
         <p v-else>Nenhum post carregado.</p>
@@ -36,7 +36,7 @@
             el: '#app',
             data: {
                 posts: [],
-                ver_detalhes: false
+                post_selecionado: false
             },
             methods: {
                 consumir_api() {
@@ -44,13 +44,14 @@
                         .then(response => response.json())
                         .then(data => {
                             this.posts = data;
+                            // console.log(this.posts[0]);
                         })
                         .catch(error => {
                             console.error('Erro ao buscar posts:', error);
                         });
                 },
-                ver_detalhes(index) {
-                    // this.ver_detalhes = !this.ver_detalhes;
+                ver_detalhes(id) {
+                    this.post_selecionado = id;
                 }
 
             }
