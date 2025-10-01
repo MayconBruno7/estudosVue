@@ -55,7 +55,7 @@
             methods: {
                 marcar_concluido(index) {
                     let lista = JSON.parse(localStorage.getItem('tarefas')) || [];
-                    lista[index].status = "Concluída ✅";
+                    lista[index].status = "Concluída";
 
                     localStorage.setItem("tarefas", JSON.stringify(lista));
                     this.tarefas = lista;
